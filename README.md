@@ -1,23 +1,4 @@
----
-title: "Guide to the code folder"
-author: "Andrea Sottosanti, Francesco Denti, Stefania Galimberti, Davide Risso, Giulia Capitoli"
-output:
-  html_document:
-    keep_md: true
-    theme: cosmo
-    highlight: tango
-    toc: true
-    code_folding: "show"
-    df_print: paged
-editor_options: 
-  markdown: 
-    wrap: 72
-params:
-  results: T
----
-
-
-
+# Guide to the code folder
 
 ----
 
