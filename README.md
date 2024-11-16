@@ -16,7 +16,7 @@ Spatially informed non-negative matrix tri-factorization for co-clustering mass 
 - [Section 3](#s3) contains a guide on real data analysis.  
 - [Section 4](#s4) contains the remaining files.  
 
-# Section 1   {#s1}
+# Section 1
 The required packages are listed [below](#s1-s11). 
 
 Most of them are available on `CRAN` and can be easily installed using `install.packages("name-of-package")`.
@@ -100,12 +100,12 @@ library(TRIFASE)
 install.packages("~/TRIFASE_0.0.2.tar.gz", repos = NULL, type = "source")
 ```
                               
-# Section 2   {#s2}
+# Section 2
 This section describes the steps to fully reproduce the simulation results of the study.
 
 The steps described in this section require the installation of packages listed in [Section 1](#s1). Computational time depends on the cores available for parallel computation. To adjust the number of cores, change the variable `n.cores`.
 
-### Section 2.1 - Reproduce data generation and simulation studies {#s2-ss1}
+### Section 2.1 - Reproduce data generation and simulation studies
 
 Set the parent directory `TRIFASE_Code` as the working directory.
 All the functions needed for the simulation study can be imported into the R Environment:
@@ -124,7 +124,7 @@ source("SIMULATION_STUDIES/AUX/f_Performance_index.R")
 
 After that, you can run the simulation scripts. 
 
-###  Section 2.2 - Simulation scripts {#s2-ss2}
+###  Section 2.2 - Simulation scripts
 The user can run one of the R files listed below:
 
 * `run_functions_Simulation_study.R` (operating in `SIMULATION_STUDIES/SIMULATION_RESULTS/Simulation_Study`)
@@ -170,7 +170,7 @@ source("SIMULATION_STUDIES/plot_Simulation_graphs_Scalability.R")
 source("SIMULATION_STUDIES/plot_Simulation_graphs_Loss.R")
 ```
 
-#### Table 1 {#TabRes}
+#### Table 1
 <table class="table table-striped table-hover table-condensed table-responsive" style="color: black; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
@@ -325,7 +325,7 @@ source("SIMULATION_STUDIES/plot_Simulation_graphs_Loss.R")
 </tbody>
 </table>
  
-###  Section 2.4 - Master R script {#s2-ss4}
+###  Section 2.4 - Master R script
 All the scripts described in [Section 2 - subsection 2](#s2-ss2) and [Section 2 - subsection 3](#s2-ss3) are reported in a unique R file called `master.R`. This script will reproduce all the results related to the simulations.
 Be sure to set the parent directory `TRIFASE_Code` as the working directory before running `master.R`.
 
@@ -333,7 +333,7 @@ For each Figure and Table generated through `master.R`, the object names in the 
 
 By default, the script utilizes 60 cores. To adjust the number of cores, modify `n.cores` (line 30).
 
-# Section 3   {#s3}
+# Section 3
 The data that support the findings of this study originated from:
 
 * *V. Denti, G. Capitoli, I. Piga, F. Clerici, L. Pagani, L. Criscuolo, G. Bindi, L. Principi, C. Chinello, G. Paglia, F. Magni, A. Smith*  
@@ -373,7 +373,7 @@ The script `Real_Data_graph.R` reproduces all the Main and Supplementary text fi
 source("REAL_DATA/Real_Data_graph.R")
 ```
 
-# Section 4  {#s4}
+# Section 4
 Another file in the folder `TRIFASE_Code`:
 
 * `README.Rmd` produce this `.html`.
