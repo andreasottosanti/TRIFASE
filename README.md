@@ -42,7 +42,8 @@ Most of them are available on `CRAN` and can be easily installed using `install.
 A full guide to the installation of packages that are not on `CRAN` can be found [here](#s1-ss2).
                               
 ### Pakages required {#s1-ss1}
-```{r c00, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 library(dplyr)
 library(stringr)
 library(ggplot2)
@@ -62,15 +63,58 @@ library(formattable)
 library(knitr)
 ```
 
-```{r c0, echo=TRUE, message=FALSE, warning=FALSE}
+
+``` r
 sessionInfo()
+```
+
+```
+## R version 4.4.0 (2024-04-24)
+## Platform: x86_64-apple-darwin20
+## Running under: macOS 15.1
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## time zone: Europe/Rome
+## tzcode source: internal
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] knitr_1.49         formattable_0.2.1  kableExtra_1.4.0   viridis_0.6.5     
+##  [5] viridisLite_0.4.2  xtable_1.8-4       fossil_0.4.0       shapefiles_0.7.2  
+##  [9] foreign_0.8-87     maps_3.4.2         sp_2.1-4           scales_1.3.0      
+## [13] patchwork_1.3.0    latex2exp_0.9.6    reshape2_1.4.4     Rfast_2.1.0       
+## [17] RcppParallel_5.1.9 RcppZiggurat_0.1.6 Rcpp_1.0.13-1      TRIFASE_0.0.2     
+## [21] Matrix_1.7-1       lattice_0.22-6     ggplot2_3.5.1      stringr_1.5.1     
+## [25] dplyr_1.1.4       
+## 
+## loaded via a namespace (and not attached):
+##  [1] sass_0.4.9        utf8_1.2.4        generics_0.1.3    xml2_1.3.6       
+##  [5] stringi_1.8.4     digest_0.6.37     magrittr_2.0.3    evaluate_1.0.1   
+##  [9] grid_4.4.0        fastmap_1.2.0     plyr_1.8.9        jsonlite_1.8.9   
+## [13] gridExtra_2.3     fansi_1.0.6       jquerylib_0.1.4   cli_3.6.3        
+## [17] rlang_1.1.4       munsell_0.5.1     withr_3.0.2       cachem_1.1.0     
+## [21] yaml_2.3.10       tools_4.4.0       parallel_4.4.0    colorspace_2.1-1 
+## [25] vctrs_0.6.5       R6_2.5.1          lifecycle_1.0.4   htmlwidgets_1.6.4
+## [29] pkgconfig_2.0.3   pillar_1.9.0      bslib_0.8.0       gtable_0.3.6     
+## [33] glue_1.8.0        systemfonts_1.1.0 xfun_0.49         tibble_3.2.1     
+## [37] tidyselect_1.2.1  rstudioapi_0.17.1 farver_2.1.2      htmltools_0.5.8.1
+## [41] svglite_2.1.3     rmarkdown_2.29    compiler_4.4.0
 ```
                               
 ### Not on `CRAN` packages {#s1-ss2}
 One package is not available on `CRAN`: `TRIFASE`.
 It can be installed from the GitHub repository `https://github.com/andreasottosanti/TRIFASE` and thus requires the R package `devtools.` Alternatively, it can be installed using the R package `TRIFASE_0.0.2.tar.gz`.
 
-```{r c1, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 library(TRIFASE)
 install.packages("~/TRIFASE_0.0.2.tar.gz", repos = NULL, type = "source")
 ```
@@ -85,7 +129,8 @@ The steps described in this section require the installation of packages listed 
 Set the parent directory `TRIFASE_Code` as the working directory.
 All the functions needed for the simulation study can be imported into the R Environment:
 
-```{r c2-1, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 source("SIMULATION_STUDIES/AUX/sim_coordinates_matrix.R")
 source("SIMULATION_STUDIES/AUX/a_Scenarios.R")
 source("SIMULATION_STUDIES/AUX/b_GenerateData.R")
@@ -117,7 +162,8 @@ Note that the order in which the scripts are executed is not relevant. These cod
 
 Running only one of the scripts [listed in](#s2-ss2) reconstructs the simulation study only partially. All five scripts must be run to reproduce all the simulation results reported in the main *manuscript*. 
 
-```{r c2-2, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 source("SIMULATION_STUDIES/run_functions_Simulation_study.R")
 source("SIMULATION_STUDIES/run_functions_Add_sim_study_1.R")
 source("SIMULATION_STUDIES/run_functions_Add_sim_study_2.R")
@@ -135,7 +181,8 @@ Use the R scripts `plot_*.R` to create the images reported in the paper. The plo
 
 In detail, Table [1](#TabRes) maps all the results reported in the Manuscript with the corresponding generation code.
 
-```{r c2-3, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 source("SIMULATION_STUDIES/plot_Simulation_graphs_Spatial.R")
 source("SIMULATION_STUDIES/plot_Simulation_graphs_noSpatial.R")
 source("SIMULATION_STUDIES/plot_Simulation_graphs_Scalability.R")
@@ -143,115 +190,159 @@ source("SIMULATION_STUDIES/plot_Simulation_graphs_Loss.R")
 ```
 
 #### Table 1 {#TabRes}
-```{r esempio-tabella, echo=FALSE}
-dati <- data.frame(
-'ID' = c("Figure2",
-         "Figure3",
-         "Figure4",
-         "Figure5",
-         "Figure6",
-         "Table1",
-         "Figure2Suppl",
-         "Figure3Suppl",
-         "Figure4Suppl",
-         "Figure5Suppl",
-         "Figure6Suppl",
-         "Figure7Suppl",
-         "Figure8Suppl",
-         "Figure9Suppl",
-         "Figure10Suppl",
-         "Figure11Suppl",
-         "Figure12Suppl",
-         "Figure13Suppl",
-         "Figure14Suppl",
-         "Figure15Suppl"),
-'Position' = c("Main Manuscript",
-               "Main Manuscript",
-               "Main Manuscript",
-               "Main Manuscript",
-               "Main Manuscript",
-               "Main Manuscript",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information",
-               "Supporting Information"),
-`Object Directory` = c("SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "REAL_DATA/GRAPHS/",
-                       "REAL_DATA/GRAPHS/",
-                       "REAL_DATA/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "SIMULATION_STUDIES/GRAPHS/",
-                       "REAL_DATA/GRAPHS/",
-                       "REAL_DATA/GRAPHS/"
-             ),
-`Original Script` = c("plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "Real_Data_graph.R",
-                      "Real_Data_graph.R",
-                      "Real_Data_analysis.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Scalability.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_Spatial.R",
-                      "plot_Simulation_graphs_noSpatial.R",
-                      "plot_Simulation_graphs_noSpatial.R",
-                      "plot_Simulation_graphs_noSpatial.R",
-                      "plot_Simulation_graphs_Loss.R",
-                      "Real_Data_graph.R",
-                      "Real_Data_graph.R"
-             ),
-`Line in Master.R` = c("997",
-         "988",
-         "971",
-         "65",
-         "172",
-         "95",
-         "1001",
-         "1005",
-         "992",
-         "89",
-         "975",
-         "979",
-         "983",
-         "966",
-         "351",
-         "355",
-         "359",
-         "210",
-         "132",
-         "146")
-)
-colnames(dati) <- c("ID" ,"Position","Object Directory", "Original Script" ,"Line in Original Script")
-kable(dati, format = "html") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-```
+<table class="table table-striped table-hover table-condensed table-responsive" style="color: black; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> ID </th>
+   <th style="text-align:left;"> Position </th>
+   <th style="text-align:left;"> Object Directory </th>
+   <th style="text-align:left;"> Original Script </th>
+   <th style="text-align:left;"> Line in Original Script </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Figure2 </td>
+   <td style="text-align:left;"> Main Manuscript </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 997 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure3 </td>
+   <td style="text-align:left;"> Main Manuscript </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 988 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure4 </td>
+   <td style="text-align:left;"> Main Manuscript </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 971 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure5 </td>
+   <td style="text-align:left;"> Main Manuscript </td>
+   <td style="text-align:left;"> REAL_DATA/GRAPHS/ </td>
+   <td style="text-align:left;"> Real_Data_graph.R </td>
+   <td style="text-align:left;"> 65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure6 </td>
+   <td style="text-align:left;"> Main Manuscript </td>
+   <td style="text-align:left;"> REAL_DATA/GRAPHS/ </td>
+   <td style="text-align:left;"> Real_Data_graph.R </td>
+   <td style="text-align:left;"> 172 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Table1 </td>
+   <td style="text-align:left;"> Main Manuscript </td>
+   <td style="text-align:left;"> REAL_DATA/GRAPHS/ </td>
+   <td style="text-align:left;"> Real_Data_analysis.R </td>
+   <td style="text-align:left;"> 95 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure2Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 1001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure3Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 1005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure4Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 992 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure5Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Scalability.R </td>
+   <td style="text-align:left;"> 89 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure6Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 975 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure7Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 979 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure8Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 983 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure9Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Spatial.R </td>
+   <td style="text-align:left;"> 966 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure10Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_noSpatial.R </td>
+   <td style="text-align:left;"> 351 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure11Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_noSpatial.R </td>
+   <td style="text-align:left;"> 355 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure12Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_noSpatial.R </td>
+   <td style="text-align:left;"> 359 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure13Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> SIMULATION_STUDIES/GRAPHS/ </td>
+   <td style="text-align:left;"> plot_Simulation_graphs_Loss.R </td>
+   <td style="text-align:left;"> 210 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure14Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> REAL_DATA/GRAPHS/ </td>
+   <td style="text-align:left;"> Real_Data_graph.R </td>
+   <td style="text-align:left;"> 132 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Figure15Suppl </td>
+   <td style="text-align:left;"> Supporting Information </td>
+   <td style="text-align:left;"> REAL_DATA/GRAPHS/ </td>
+   <td style="text-align:left;"> Real_Data_graph.R </td>
+   <td style="text-align:left;"> 146 </td>
+  </tr>
+</tbody>
+</table>
  
 ###  Section 2.4 - Master R script {#s2-ss4}
 All the scripts described in [Section 2 - subsection 2](#s2-ss2) and [Section 2 - subsection 3](#s2-ss3) are reported in a unique R file called `master.R`. This script will reproduce all the results related to the simulations.
@@ -280,13 +371,15 @@ Once data are available, set the parent directory `TRIFASE_Code` as the working 
 Make sure to save the `X.RDS` and the `S.RDS` in the `DATASET` folder.        
 The function needed for the real data study can be imported into the R Environment:
 
-```{r c3-1, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 source("REAL_DATA/c_Estimate_RealData.R")
 ```
 
 Without manipulations the script `Real_Data_analysis.R` fits TRIFASE to the real dataset. The model is fitted under different random starting points, retaining the model estimate corresponding to the smallest value of the loss function. To assess the strength of the spatial correlation, the script fits sixteen different TRIFASE models characterized by different fixed values of $\phi \in \{0.5,0.7,0.9,1,3,5,10,20\}$ and by the two fastest versions of TRIFASE (C,A) and (S,A). 
 
-```{r c3-2, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 source("REAL_DATA/Real_Data_analysis.R")
 ```
 
@@ -294,7 +387,8 @@ The different conditions under which the estimation algorithms of TRIFASE are ru
 
 The script `Real_Data_graph.R` reproduces all the Main and Supplementary text figures using the model estimate corresponding to the smallest loss function value. We refer to Table [1](#TabRes) to map Figures from the code to the text.
 
-```{r c3-3, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+
+``` r
 source("REAL_DATA/Real_Data_graph.R")
 ```
 
