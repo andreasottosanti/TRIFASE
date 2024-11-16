@@ -255,7 +255,7 @@ kable(dati, format = "html") %>%
  
 ###  Section 2.4 - Master R script {#s2-ss4}
 All the scripts described in [Section 2 - subsection 2](#s2-ss2) and [Section 2 - subsection 3](#s2-ss3) are reported in a unique R file called `master.R`. This script will reproduce all the results related to the simulations.
-Be sure to set the parent directory `TRIFASE_Code` as the working directory before running `master.R`.
+Be sure to set the parent directory to this directory as the working directory before running `master.R`.
 
 For each Figure and Table generated through `master.R`, the object names in the R script match the exact labels in the Manuscript. E.g., Figure 1 corresponds to the `Figure1` object in the `R script`, and Supplementary Figure 1 is labeled as `Figure1Suppl`. Users can locate the line numbers in `master.R` where Figures and Tables are saved by referring to Table 1.
 
@@ -269,7 +269,7 @@ Spatial Multiomics of Lipids, N-Glycans, and Tryptic Peptides on a Single FFPE T
 **Journal of Proteome Research**, 21(11):2798–2809, 2022. ISSN 1535-3907. doi: 10.1021/acs.jproteome.2c00601.571
 
 ### Real data results
-The scripts stored in the folder `TRIFASE_Code` will reproduce all the results related to the real data (i.e., the mouse brain tissue sample). 
+The scripts stored in this folder will reproduce all the results related to the real data (i.e., the mouse brain tissue sample). 
 To map Tables and Figures from `Real Data codes` to the Manuscript text we refer to Table [1](#TabRes).
 
 To reproduce the Real Data results, users need to request the `X.RDS` and the `S.RDS` from the corresponding author.

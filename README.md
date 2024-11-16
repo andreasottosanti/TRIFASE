@@ -1,4 +1,23 @@
-# Guide to the code folder
+---
+title: "Guide to the code folder"
+author: "Andrea Sottosanti, Francesco Denti, Stefania Galimberti, Davide Risso, Giulia Capitoli"
+output:
+  html_document:
+    keep_md: true
+    theme: cosmo
+    highlight: tango
+    toc: true
+    code_folding: "show"
+    df_print: paged
+editor_options: 
+  markdown: 
+    wrap: 72
+params:
+  results: T
+---
+
+
+
 
 ----
 
@@ -22,7 +41,7 @@ The required packages are listed [below](#s1-s11).
 Most of them are available on `CRAN` and can be easily installed using `install.packages("name-of-package")`.
 A full guide to the installation of packages that are not on `CRAN` can be found [here](#s1-ss2).
                               
-### Pakages required {#s1-ss1}
+### Pakages required
 
 ``` r
 library(dplyr)
@@ -90,7 +109,7 @@ sessionInfo()
 ## [41] svglite_2.1.3     rmarkdown_2.29    compiler_4.4.0
 ```
                               
-### Not on `CRAN` packages {#s1-ss2}
+### Not on `CRAN` packages
 One package is not available on `CRAN`: `TRIFASE`.
 It can be installed from the GitHub repository `https://github.com/andreasottosanti/TRIFASE` and thus requires the R package `devtools.` Alternatively, it can be installed using the R package `TRIFASE_0.0.2.tar.gz`.
 
@@ -105,7 +124,7 @@ This section describes the steps to fully reproduce the simulation results of th
 
 The steps described in this section require the installation of packages listed in [Section 1](#s1). Computational time depends on the cores available for parallel computation. To adjust the number of cores, change the variable `n.cores`.
 
-### Section 2.1 - Reproduce data generation and simulation studies
+### Section 2.1 - Reproduce data generation and simulation studies {#s2-ss1}
 
 Set the parent directory `TRIFASE_Code` as the working directory.
 All the functions needed for the simulation study can be imported into the R Environment:
@@ -152,7 +171,7 @@ source("SIMULATION_STUDIES/run_functions_Add_sim_study_3.R")
 source("SIMULATION_STUDIES/run_functions_Add_sim_study_4.R")
 ```
 
-###  Section 2.3 - Simulation results {#s2-ss3}
+###  Section 2.3 - Simulation results
 Use the R scripts `plot_*.R` to create the images reported in the paper. The plots are saved in /GRAPHS. In particular,
 
 * `plot_Simulation_graphs_Spatial.R` recreates all the figures related to the TRIFASE clustering performances under different experimental conditions;
@@ -170,7 +189,7 @@ source("SIMULATION_STUDIES/plot_Simulation_graphs_Scalability.R")
 source("SIMULATION_STUDIES/plot_Simulation_graphs_Loss.R")
 ```
 
-#### Table 1
+#### Table 1 {#TabRes}
 <table class="table table-striped table-hover table-condensed table-responsive" style="color: black; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
@@ -327,7 +346,7 @@ source("SIMULATION_STUDIES/plot_Simulation_graphs_Loss.R")
  
 ###  Section 2.4 - Master R script
 All the scripts described in [Section 2 - subsection 2](#s2-ss2) and [Section 2 - subsection 3](#s2-ss3) are reported in a unique R file called `master.R`. This script will reproduce all the results related to the simulations.
-Be sure to set the parent directory `TRIFASE_Code` as the working directory before running `master.R`.
+Be sure to set the parent directory to this directory as the working directory before running `master.R`.
 
 For each Figure and Table generated through `master.R`, the object names in the R script match the exact labels in the Manuscript. E.g., Figure 1 corresponds to the `Figure1` object in the `R script`, and Supplementary Figure 1 is labeled as `Figure1Suppl`. Users can locate the line numbers in `master.R` where Figures and Tables are saved by referring to Table 1.
 
@@ -341,7 +360,7 @@ Spatial Multiomics of Lipids, N-Glycans, and Tryptic Peptides on a Single FFPE T
 **Journal of Proteome Research**, 21(11):2798–2809, 2022. ISSN 1535-3907. doi: 10.1021/acs.jproteome.2c00601.571
 
 ### Real data results
-The scripts stored in the folder `TRIFASE_Code` will reproduce all the results related to the real data (i.e., the mouse brain tissue sample). 
+The scripts stored in this folder will reproduce all the results related to the real data (i.e., the mouse brain tissue sample). 
 To map Tables and Figures from `Real Data codes` to the Manuscript text we refer to Table [1](#TabRes).
 
 To reproduce the Real Data results, users need to request the `X.RDS` and the `S.RDS` from the corresponding author.
