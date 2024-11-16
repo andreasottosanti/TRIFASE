@@ -1,0 +1,304 @@
+---
+title: "Guide to the code folder"
+author: "Andrea Sottosanti, Francesco Denti, Stefania Galimberti, Davide Risso, Giulia Capitoli"
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    toc: true
+    code_folding: "show"
+    df_print: paged
+editor_options: 
+  markdown: 
+    wrap: 72
+params:
+  results: T
+---
+
+
+
+
+----
+
+This folder contains the scripts to reproduce the results presented in the main text and supplementary material of
+
+* *Andrea Sottosanti, Francesco Denti, Stefania Galimberti, Davide Risso, Giulia Capitoli*;  
+Spatially informed non-negative matrix tri-factorization for co-clustering mass spectrometry data,  
+**Biometrical Journal**, 2024
+
+----
+
+# Introduction
+- Packages used and version of R are detailed in [Section 1](#s1).
+- [Section 2](#s2) contains a guide to fully reproduce the results of the simulations, as well as all the graphs and the tables included in the article. 
+- [Section 3](#s3) contains a guide on real data analysis.  
+- [Section 4](#s4) contains the remaining files.  
+
+# Section 1   {#s1}
+The required packages are listed [below](#s1-s11). 
+
+Most of them are available on `CRAN` and can be easily installed using `install.packages("name-of-package")`.
+A full guide to the installation of packages that are not on `CRAN` can be found [here](#s1-ss2).
+                              
+### Pakages required {#s1-ss1}
+```{r c00, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE}
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(lattice)
+library(Matrix)
+library(TRIFASE)
+library(Rfast)
+library(reshape2)
+library(latex2exp)
+library(patchwork)
+require(scales)
+library(fossil)
+library(xtable)
+library(viridis)
+library(kableExtra)
+library(formattable)
+library(knitr)
+```
+
+```{r c0, echo=TRUE, message=FALSE, warning=FALSE}
+sessionInfo()
+```
+                              
+### Not on `CRAN` packages {#s1-ss2}
+One package is not available on `CRAN`: `TRIFASE`.
+It can be installed from the GitHub repository `https://github.com/andreasottosanti/TRIFASE` and thus requires the R package `devtools.` Alternatively, it can be installed using the R package `TRIFASE_0.0.2.tar.gz`.
+
+```{r c1, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+library(TRIFASE)
+install.packages("~/TRIFASE_0.0.2.tar.gz", repos = NULL, type = "source")
+```
+                              
+# Section 2   {#s2}
+This section describes the steps to fully reproduce the simulation results of the study.
+
+The steps described in this section require the installation of packages listed in [Section 1](#s1). Computational time depends on the cores available for parallel computation. To adjust the number of cores, change the variable `n.cores`.
+
+### Section 2.1 - Reproduce data generation and simulation studies {#s2-ss1}
+
+Set the parent directory `TRIFASE_Code` as the working directory.
+All the functions needed for the simulation study can be imported into the R Environment:
+
+```{r c2-1, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+source("SIMULATION_STUDIES/AUX/sim_coordinates_matrix.R")
+source("SIMULATION_STUDIES/AUX/a_Scenarios.R")
+source("SIMULATION_STUDIES/AUX/b_GenerateData.R")
+source("SIMULATION_STUDIES/AUX/c_Estimate.R")
+source("SIMULATION_STUDIES/AUX/c_Estimate_Scalability.R")
+source("SIMULATION_STUDIES/AUX/d_ExtractResults.R")
+source("SIMULATION_STUDIES/AUX/e_setParameters.R")
+source("SIMULATION_STUDIES/AUX/f_Performance_index.R")
+```
+
+After that, you can run the simulation scripts. 
+
+###  Section 2.2 - Simulation scripts {#s2-ss2}
+The user can run one of the R files listed below:
+
+* `run_functions_Simulation_study.R` (operating in `SIMULATION_STUDIES/SIMULATION_RESULTS/Simulation_Study`)
+* `run_functions_Add_sim_study_1.R` (operating in `SIMULATION_STUDIES/SIMULATION_RESULTS/Add_sim_study_1`)
+* `run_functions_Add_sim_study_2.R` (operating in `SIMULATION_STUDIES/SIMULATION_RESULTS/Add_sim_study_2`)
+* `run_functions_Add_sim_study_3.R` (operating in `SIMULATION_STUDIES/SIMULATION_RESULTS/Add_sim_study_3`)
+* `run_functions_Add_sim_study_4.R` (operating in `SIMULATION_STUDIES/SIMULATION_RESULTS/Add_sim_study_4`)
+
+Note that the order in which the scripts are executed is not relevant. These codes have a common structure, as they:
+
+* a) save the parameters used to generate the data under each scenario (stored in `/SCENARIOS`),
+* b) generate the datasets (stored in `/GENERATED_DATA`),
+* c) save the model parameters' combinations (stored in `/SET_PARAMETERS`)
+* d) fit the models (complete outputs saved in `/ESTIMATED_RUNS`) and
+* e) extract the best runs and save the corresponding results in `.RDS` files (stored in `/EXTRACT_RESULTS`)
+
+Running only one of the scripts [listed in](#s2-ss2) reconstructs the simulation study only partially. All five scripts must be run to reproduce all the simulation results reported in the main *manuscript*. 
+
+```{r c2-2, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+source("SIMULATION_STUDIES/run_functions_Simulation_study.R")
+source("SIMULATION_STUDIES/run_functions_Add_sim_study_1.R")
+source("SIMULATION_STUDIES/run_functions_Add_sim_study_2.R")
+source("SIMULATION_STUDIES/run_functions_Add_sim_study_3.R")
+source("SIMULATION_STUDIES/run_functions_Add_sim_study_4.R")
+```
+
+###  Section 2.3 - Simulation results {#s2-ss3}
+Use the R scripts `plot_*.R` to create the images reported in the paper. The plots are saved in /GRAPHS. In particular,
+
+* `plot_Simulation_graphs_Spatial.R` recreates all the figures related to the TRIFASE clustering performances under different experimental conditions;
+* `plot_Simulation_graphs_noSpatial.R` recreates all the figures related to the TRIFASE clustering performances under the scenario without spatial correlation;
+* `plot_Simulation_graphs_Scalability.R` investigates the scalability of the TRIFASE algorithm under different experimental conditions;
+* `plot_Simulation_graphs_Loss.R` investigates the results in terms of the loss function of the TRIFASE algorithm;
+
+In detail, Table [1](#TabRes) maps all the results reported in the Manuscript with the corresponding generation code.
+
+```{r c2-3, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+source("SIMULATION_STUDIES/plot_Simulation_graphs_Spatial.R")
+source("SIMULATION_STUDIES/plot_Simulation_graphs_noSpatial.R")
+source("SIMULATION_STUDIES/plot_Simulation_graphs_Scalability.R")
+source("SIMULATION_STUDIES/plot_Simulation_graphs_Loss.R")
+```
+
+#### Table 1 {#TabRes}
+```{r esempio-tabella, echo=FALSE}
+dati <- data.frame(
+'ID' = c("Figure2",
+         "Figure3",
+         "Figure4",
+         "Figure5",
+         "Figure6",
+         "Table1",
+         "Figure2Suppl",
+         "Figure3Suppl",
+         "Figure4Suppl",
+         "Figure5Suppl",
+         "Figure6Suppl",
+         "Figure7Suppl",
+         "Figure8Suppl",
+         "Figure9Suppl",
+         "Figure10Suppl",
+         "Figure11Suppl",
+         "Figure12Suppl",
+         "Figure13Suppl",
+         "Figure14Suppl",
+         "Figure15Suppl"),
+'Position' = c("Main Manuscript",
+               "Main Manuscript",
+               "Main Manuscript",
+               "Main Manuscript",
+               "Main Manuscript",
+               "Main Manuscript",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information",
+               "Supporting Information"),
+`Object Directory` = c("SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "REAL_DATA/GRAPHS/",
+                       "REAL_DATA/GRAPHS/",
+                       "REAL_DATA/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "SIMULATION_STUDIES/GRAPHS/",
+                       "REAL_DATA/GRAPHS/",
+                       "REAL_DATA/GRAPHS/"
+             ),
+`Original Script` = c("plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "Real_Data_graph.R",
+                      "Real_Data_graph.R",
+                      "Real_Data_analysis.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Scalability.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_Spatial.R",
+                      "plot_Simulation_graphs_noSpatial.R",
+                      "plot_Simulation_graphs_noSpatial.R",
+                      "plot_Simulation_graphs_noSpatial.R",
+                      "plot_Simulation_graphs_Loss.R",
+                      "Real_Data_graph.R",
+                      "Real_Data_graph.R"
+             ),
+`Line in Master.R` = c("997",
+         "988",
+         "971",
+         "65",
+         "172",
+         "95",
+         "1001",
+         "1005",
+         "992",
+         "89",
+         "975",
+         "979",
+         "983",
+         "966",
+         "351",
+         "355",
+         "359",
+         "210",
+         "132",
+         "146")
+)
+colnames(dati) <- c("ID" ,"Position","Object Directory", "Original Script" ,"Line in Original Script")
+kable(dati, format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+ 
+###  Section 2.4 - Master R script {#s2-ss4}
+All the scripts described in [Section 2 - subsection 2](#s2-ss2) and [Section 2 - subsection 3](#s2-ss3) are reported in a unique R file called `master.R`. This script will reproduce all the results related to the simulations.
+Be sure to set the parent directory `TRIFASE_Code` as the working directory before running `master.R`.
+
+For each Figure and Table generated through `master.R`, the object names in the R script match the exact labels in the Manuscript. E.g., Figure 1 corresponds to the `Figure1` object in the `R script`, and Supplementary Figure 1 is labeled as `Figure1Suppl`. Users can locate the line numbers in `master.R` where Figures and Tables are saved by referring to Table 1.
+
+By default, the script utilizes 60 cores. To adjust the number of cores, modify `n.cores` (line 30).
+
+# Section 3   {#s3}
+The data that support the findings of this study originated from:
+
+* *V. Denti, G. Capitoli, I. Piga, F. Clerici, L. Pagani, L. Criscuolo, G. Bindi, L. Principi, C. Chinello, G. Paglia, F. Magni, A. Smith*  
+Spatial Multiomics of Lipids, N-Glycans, and Tryptic Peptides on a Single FFPE Tissue Section  
+**Journal of Proteome Research**, 21(11):2798–2809, 2022. ISSN 1535-3907. doi: 10.1021/acs.jproteome.2c00601.571
+
+### Real data results
+The scripts stored in the folder `TRIFASE_Code` will reproduce all the results related to the real data (i.e., the mouse brain tissue sample). 
+To map Tables and Figures from `Real Data codes` to the Manuscript text we refer to Table [1](#TabRes).
+
+To reproduce the Real Data results, users need to request the `X.RDS` and the `S.RDS` from the corresponding author.
+The dataset (`X.RDS`) comprises 78 rows representing the lipid signals observed over approximately 6500 columns representing the spatially related pixels. Spatial locations are stored in the `S.RDS` file.
+Data are available from the corresponding author upon reasonable request.
+
+Once data are available, set the parent directory `TRIFASE_Code` as the working directory.
+Make sure to save the `X.RDS` and the `S.RDS` in the `DATASET` folder.        
+The function needed for the real data study can be imported into the R Environment:
+
+```{r c3-1, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+source("REAL_DATA/c_Estimate_RealData.R")
+```
+
+Without manipulations the script `Real_Data_analysis.R` fits TRIFASE to the real dataset. The model is fitted under different random starting points, retaining the model estimate corresponding to the smallest value of the loss function. To assess the strength of the spatial correlation, the script fits sixteen different TRIFASE models characterized by different fixed values of $\phi \in \{0.5,0.7,0.9,1,3,5,10,20\}$ and by the two fastest versions of TRIFASE (C,A) and (S,A). 
+
+```{r c3-2, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+source("REAL_DATA/Real_Data_analysis.R")
+```
+
+The different conditions under which the estimation algorithms of TRIFASE are run are displayed in Table 1 of the main Manuscript (to map the Table from code to the Manuscript, we refer to Table [1](#TabRes)).
+
+The script `Real_Data_graph.R` reproduces all the Main and Supplementary text figures using the model estimate corresponding to the smallest loss function value. We refer to Table [1](#TabRes) to map Figures from the code to the text.
+
+```{r c3-3, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+source("REAL_DATA/Real_Data_graph.R")
+```
+
+# Section 4  {#s4}
+Another file in the folder `TRIFASE_Code`:
+
+* `README.Rmd` produce this `.html`.
+                                          
